@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Supto's Heart</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(-45deg, #fce4ec, #f8bbd0, #f48fb1, #f06292);
+      background-size: 400% 400%;
+      animation: gradient 15s ease infinite;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    @keyframes gradient {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    h1 {
+      margin-top: 100px;
+      font-size: 2.5em;
+      color: #fff;
+      text-shadow: 2px 2px #d81b60;
+    }
+
+    #enterBtn, #yesBtn, #noBtn {
+      font-size: 18px;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 10px;
+      margin: 20px;
+      cursor: pointer;
+    }
+
+    #enterBtn {
+      background-color: #c2185b;
+      color: white;
+    }
+
+    #yesBtn {
+      background-color: #388e3c;
+      color: white;
+      display: none;
+    }
+
+    #noBtn {
+      background-color: #d32f2f;
+      color: white;
+      position: absolute;
+      display: none;
+    }
+
+    .falling-text {
+      position: absolute;
+      font-size: 2em;
+      color: white;
+      font-weight: bold;
+      animation: fall 3s ease forwards;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    @keyframes fall {
+      0% { top: -50px; opacity: 0; }
+      50% { opacity: 1; }
+      100% { top: 200px; opacity: 0; }
+    }
+
+    .rose {
+      position: absolute;
+      top: -50px;
+      font-size: 24px;
+      color: red;
+      animation: fall 5s linear infinite;
+    }
+
+    @keyframes fallRose {
+      to {
+        transform: translateY(100vh);
+        opacity: 0;
+      }
+    }
+
+    #message {
+      display: none;
+      color: #fff;
+      font-size: 1.8em;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <audio autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/10/30/audio_bf2dcfa6c2.mp3?filename=romantic-background-ambient-music-124007.mp3" type="audio/mp3">
+  </audio>
+
+  <h1 id="mainTitle">Click to enter in Supto's Heart</h1>
+  <button id="enterBtn">Click Here</button>
+  <h2 id="message"></h2>
+  <button id="yesBtn">Yes</button>
+  <button id="noBtn">No</button>
+
+  <script>
+    const mainTitle = document.getElementById('mainTitle');
+    const enterBtn = document.getElementById('enterBtn');
+    const message = document.getElementById('message');
+    const yesBtn = document.getElementById('yesBtn');
+    const noBtn = document.getElementById('noBtn');
+
+    enterBtn.onclick = () => {
+      mainTitle.style.display = 'none';
+      enterBtn.style.display = 'none';
+
+      dropText('Shiropa');
+      setTimeout(() => dropText('Suhasini'), 500);
+
+      setTimeout(() => {
+        message.style.display = 'block';
+        typeWriter();
+        yesBtn.style.display = 'inline-block';
+        noBtn.style.display = 'inline-block';
+        noBtn.style.top = '300px';
+        noBtn.style.left = '50%';
+      }, 3000);
+    };
+
+    function dropText(name) {
+      const el = document.createElement('div');
+      el.className = 'falling-text';
+      el.textContent = name;
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 3000);
+    }
+
+    noBtn.addEventListener('mouseenter', () => {
+      const x = Math.random() * (window.innerWidth - 100) + 'px';
+      const y = Math.random() * (window.innerHeight - 100) + 'px';
+      noBtn.style.left = x;
+      noBtn.style.top = y;
+    });
+
+    noBtn.addEventListener('touchstart', () => {
+      const x = Math.random() * (window.innerWidth - 100) + 'px';
+      const y = Math.random() * (window.innerHeight - 100) + 'px';
+      noBtn.style.left = x;
+      noBtn.style.top = y;
+    });
+
+    yesBtn.onclick = () => {
+      message.innerHTML = "Ok my Wifey, Ummmmah❤️";
+      yesBtn.style.display = 'none';
+      noBtn.style.display = 'none';
+    };
+
+    let i = 0;
+    let text = "Supto Loves Shiropa Very Much... Will you marry me?";
+    let speed = 60;
+
+    function typeWriter() {
+      if (i < text.length) {
+        message.innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, speed);
+      }
+    }
+
+    // Rose fall animation (optional, light)
+    setInterval(() => {
+      const rose = document.createElement('div');
+      rose.classList.add('rose');
+      rose.style.left = Math.random() * 100 + 'vw';
+      rose.style.animation = 'fallRose 5s linear';
+      rose.innerHTML = '🌹';
+      document.body.appendChild(rose);
+      setTimeout(() => rose.remove(), 5000);
+    }, 400);
+  </script>
+
+</body>
+  </html>
