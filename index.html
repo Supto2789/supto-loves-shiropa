@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Supto's Heart</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(#ffe6f0, #ffccd5);
+      text-align: center;
+      padding-top: 100px;
+      overflow: hidden;
+    }
+    #message, #yesBtn, #noBtn {
+      display: none;
+    }
+    button {
+      padding: 15px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      margin: 20px;
+      cursor: pointer;
+    }
+    #enterBtn {
+      background-color: #ff0066;
+      color: white;
+    }
+    #yesBtn {
+      background-color: #28a745;
+      color: white;
+    }
+    #noBtn {
+      background-color: #dc3545;
+      color: white;
+      position: absolute;
+    }
+    .rose {
+      position: absolute;
+      top: -50px;
+      font-size: 24px;
+      color: red;
+      animation: fall 5s linear infinite;
+    }
+    @keyframes fall {
+      to {
+        transform: translateY(100vh);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1 id="startText">Enter Supto's Heart</h1>
+  <button id="enterBtn">Click Here</button>
+
+  <h2 id="message">Supto Loves Shiropa Very Much...<br>Will you marry me Shiropa?</h2>
+  <button id="yesBtn">Yes</button>
+  <button id="noBtn">No</button>
+
+  <script>
+    const enterBtn = document.getElementById('enterBtn');
+    const message = document.getElementById('message');
+    const yesBtn = document.getElementById('yesBtn');
+    const noBtn = document.getElementById('noBtn');
+
+    enterBtn.onclick = () => {
+      enterBtn.style.display = 'none';
+      document.getElementById('startText').style.display = 'none';
+      message.style.display = 'block';
+      yesBtn.style.display = 'inline-block';
+      noBtn.style.display = 'inline-block';
+      noBtn.style.top = '250px';
+      noBtn.style.left = '50%';
+    };
+
+    function moveNoBtn() {
+      const x = Math.floor(Math.random() * (window.innerWidth - 100)) + 'px';
+      const y = Math.floor(Math.random() * (window.innerHeight - 100)) + 'px';
+      noBtn.style.left = x;
+      noBtn.style.top = y;
+    }
+
+    noBtn.addEventListener('mouseenter', moveNoBtn);
+    noBtn.addEventListener('touchstart', moveNoBtn);
+
+    yesBtn.onclick = () => {
+      message.innerHTML = "Ok my Wifey, Ummmmah❤️";
+      yesBtn.style.display = 'none';
+      noBtn.style.display = 'none';
+    };
+
+    setInterval(() => {
+      const rose = document.createElement('div');
+      rose.classList.add('rose');
+      rose.style.left = Math.random() * 100 + 'vw';
+      rose.innerHTML = '🌹';
+      document.body.appendChild(rose);
+      setTimeout(() => rose.remove(), 5000);
+    }, 300);
+  </script>
+
+</body>
+  </html>
